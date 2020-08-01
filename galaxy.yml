@@ -1,0 +1,8 @@
+---
+- role: gantsign.visual-studio-code
+- role: gantsign.visual-studio-code-extensions
+- role: geerlingguy.pip
+- role: geerlingguy.docker
+- role: grzegorznowak.nvm_node
+- role: oefenweb.slack
+- role: webarchitect609.google_chrome
