@@ -1,0 +1,29 @@
+---
+- name: Install OpenSSH
+  dnf:
+    name: openssh
+    state: latest
+
+- name: Create ssh directory
+  file:
+    path: "{{ ansible_user_dir }}/.ssh"
+    state: directory
+    mode: 0700
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+
+- name: Get SSH Private Key From Lastpass
+  copy:
+    content: "{{ lookup('lastpass', 'Novetta/ssh-keys', field='Private Key') }}\n"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+    dest : "{{ ansible_user_dir }}/.ssh/id_rsa"
+    mode: 0600
+
+- name: Get SSH Public Key From Lastpass
+  copy:
+    content: "{{ lookup('lastpass', 'Novetta/ssh-keys', field='Public Key') }}\n"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+    dest: "{{ ansible_user_dir }}/.ssh/id_rsa.pub"
+    mode: 0644

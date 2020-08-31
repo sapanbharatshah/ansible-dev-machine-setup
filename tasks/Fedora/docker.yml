@@ -1,0 +1,23 @@
+---
+- name: Install Moby Engine and docker-compose
+  dnf:
+    name:
+      - moby-engine
+      - docker-compose
+    state: latest
+
+- name: Start The Docker Service
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Reboot systemd
+  systemd:
+    daemon_reexec: yes
+
+- name: Add sshah to the docker group
+  user:
+    name: sshah
+    groups: docker
+    append: true

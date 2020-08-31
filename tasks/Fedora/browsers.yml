@@ -1,0 +1,10 @@
+---
+- name: Install Firefox
+  dnf:
+    name: firefox
+    state: latest
+
+- name: Install chromium from the snap store
+  snap:
+    name: chromium
+    state: present

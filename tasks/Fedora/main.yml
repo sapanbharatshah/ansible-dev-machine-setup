@@ -1,0 +1,50 @@
+---
+- name: Install neovim
+  dnf: 
+    name: neovim
+    state: latest
+
+- name: Install Development Tools
+  dnf:
+    name: '@Development Tools'
+    state: present
+
+- name: Install Snaps on Fedora
+  dnf:
+    name: snapd
+    state: latest
+
+- name: Enable classic snap support by symlink /var/lib/snapd /snap
+  file:
+    src: /var/lib/snapd/snap
+    dest: /snap
+    state: link
+
+- name: Install and configure JavaScript environment
+  include_tasks: javascript.yml
+
+- name: Setup SSH
+  include_tasks: ssh.yml
+
+- name: Install Browsers
+  include_tasks: browsers.yml
+
+- name: Install Moby and Docker-compose
+  include_tasks: 
+    file: docker.yml
+    apply:
+      tags:
+        - docker
+  tags: docker
+  
+- name: Install Slack
+  include_tasks:
+    file: slack.yml
+
+- name: Install aws cli
+  include_tasks:
+    file: aws.yml
+    apply:
+      tags: 
+        - aws
+  tags: aws

@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Setup our development machine based for {{ ansbible_distribution }}
+      include_tasks: tasks/{{ ansible_distribution }}/main.yml
+      tags: always
+   

@@ -1,0 +1,10 @@
+---
+- name: Setup NVM
+  include_role:
+     name: grzegorznowak.nvm_node
+  vars:
+    nvm_node_version: "14.5.0"
+    nvm_user_name: "sshah"
+    nvm_install_globally: ['yarn']
+
+  

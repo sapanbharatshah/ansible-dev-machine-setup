@@ -1,0 +1,5 @@
+---
+- name: Install aws cli
+  dnf:
+    name: awscli
+    state: latest
